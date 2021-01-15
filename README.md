@@ -2,7 +2,7 @@
 
 |Column              |Type    |Options                  |
 |--------------------|------  |------------             |
-|nickname            |string  |unique: true, null: false|
+|nickname            |string  |null: false              |
 |email               |string  |unique: true, null: false|
 |encrypted_password  |string  |null: false              |
 |last_name_kanji     |string  |null: false              |
@@ -34,7 +34,7 @@ has_many :records
 |user                      |reference |foreign_key: true |
 |category_id               |integer   |null: false       |
 |product_condition_id      |integer   |null: false       |
-|shipping_charges_id       |integer   |null: false       |
+|shipping_charge_id        |integer   |null: false       |
 |shipment_source_id        |integer   |null: false       |
 |estimated_shipping_date_id|integer   |null: false       |
 
