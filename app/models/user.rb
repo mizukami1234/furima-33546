@@ -5,9 +5,21 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :nickname, presence: true
-  validates :last_name_kanji, presence: true
-  validates :first_name_kanji, presence: true
-  validates :last_name_kana, presence: true
-  validates :first_name_kana, presence: true
+
+  with_options presence: true, format: { with: /\A[a-zA-Z0-9]+\z/ , message: '英数字混合6文字以上' } do
+    validates :password
+  end
+
+
+  with_options presence: true, format: { with: /\A[一-龥ぁ-ん]/, message: '全角漢字・かなを使用してください' } do
+    validates :last_name_kanji
+    validates :first_name_kanji
+  end
+ 
+  with_options presence: true, format: { with: /\A[ァ-ヶー－]+\z/, message: '全角カタカナを使用してください' } do
+    validates :last_name_kana
+    validates :first_name_kana
+  end
+
   validates :birth_id, presence: true
 end
