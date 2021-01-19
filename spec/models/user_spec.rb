@@ -6,6 +6,12 @@ RSpec.describe User, type: :model do
   end
 
   describe 'ユーザー新規登録・ログインログアウト機能' do
+
+
+       it "ニックネーム、姓、名、メール、パスワード、誕生日がある場合、有効である" do
+           expect(@user).to be_valid
+        end
+      
       
    
       it 'nicknameが空では登録できない' do
@@ -48,12 +54,27 @@ RSpec.describe User, type: :model do
 
       end
 
-      it 'passwordが半角英数字混合でなければ登録できない' do
-        @user.password = '111111111'
-        @user.password_confirmation = '111111111'
+      it 'passwordが半角数字だけでは登録できない' do
+        @user.password = '1111111'
+        @user.password_confirmation = '1111111'
         @user.valid?
         expect(@user.errors.full_messages).to include( "Password 英数字混合6文字以上" )
       end
+
+      it 'passwordが半角英字だけでは登録できない' do
+        @user.password = 'aaaaaaa'
+        @user.password_confirmation = 'aaaaaaa'
+        @user.valid?
+        expect(@user.errors.full_messages).to include( "Password 英数字混合6文字以上" )
+      end
+
+      it 'passwordが全角では登録できない' do
+        @user.password = 'あいうえおあ'
+        @user.password_confirmation = 'あいうえおあ'
+        @user.valid?
+        expect(@user.errors.full_messages).to include( "Password 英数字混合6文字以上" )
+      end
+
 
 
       it 'passwordが存在してもpassword_confirmationが空では登録できない' do
