@@ -103,8 +103,23 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include ( "First name kanji can't be blank")
       end
 
+      #苗字が半角英字のみの場合を弾く
       it 'ユーザー本名(苗字) は、全角（漢字・ひらがな・カタカナ）での入力が必須であること' do
         @user.last_name_kanji = "aiueo"
+        @user.valid?
+        expect(@user.errors.full_messages).to include ( "Last name kanji 全角漢字・かな・カタカナを使用してください" )
+      end
+
+      #苗字が半角数字のみの場合を弾く
+      it 'ユーザー本名(苗字) は、全角（漢字・ひらがな・カタカナ）での入力が必須であること' do
+        @user.last_name_kanji = "11111"
+        @user.valid?
+        expect(@user.errors.full_messages).to include ( "Last name kanji 全角漢字・かな・カタカナを使用してください" )
+      end
+
+      #苗字が半角カタカナの場合を弾く
+      it 'ユーザー本名(苗字) は、全角（漢字・ひらがな・カタカナ）での入力が必須であること' do
+        @user.last_name_kanji = "ｱｲｳｴｵ"
         @user.valid?
         expect(@user.errors.full_messages).to include ( "Last name kanji 全角漢字・かな・カタカナを使用してください" )
       end
@@ -122,19 +137,62 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include ( "First name kana can't be blank")
       end
 
+      #半角英字のみ場合を弾く
       it 'ユーザー本名の苗字のフリガナは、全角（カタカナ）での入力が必須であること' do
         @user.last_name_kana = "aiueo"
         @user.valid?
         expect(@user.errors.full_messages).to include ( "Last name kana 全角カタカナを使用してください" )
       end
 
+      #半角数字のみの場合を弾く
+      it 'ユーザー本名の苗字のフリガナは、全角（カタカナ）での入力が必須であること' do
+        @user.last_name_kana = "11111"
+        @user.valid?
+        expect(@user.errors.full_messages).to include ( "Last name kana 全角カタカナを使用してください" )
+      end
+
+      #半角カタカナの場合を弾く
+      it 'ユーザー本名の苗字のフリガナは、全角（カタカナ）での入力が必須であること' do
+        @user.last_name_kana = "ｱｲｳｴｵ"
+        @user.valid?
+        expect(@user.errors.full_messages).to include ( "Last name kana 全角カタカナを使用してください" )
+      end
+
+      #全角ひらがなの場合を弾く
+      it 'ユーザー本名の苗字のフリガナは、全角（カタカナ）での入力が必須であること' do
+        @user.last_name_kana = "あいうえお"
+        @user.valid?
+        expect(@user.errors.full_messages).to include ( "Last name kana 全角カタカナを使用してください" )
+      end
+
+      
+      #半角英字のみ場合を弾く
       it 'ユーザー本名の名前のフリガナは、全角（カタカナ）での入力が必須であること' do
         @user.first_name_kana = "aiueo"
         @user.valid?
         expect(@user.errors.full_messages).to include ( "First name kana 全角カタカナを使用してください" )
       end
 
+      #半角数字のみの場合を弾く
+      it 'ユーザー本名の名前のフリガナは、全角（カタカナ）での入力が必須であること' do
+        @user.first_name_kana = "11111"
+        @user.valid?
+        expect(@user.errors.full_messages).to include ( "First name kana 全角カタカナを使用してください" )
+      end
 
+      #半角カタカナの場合を弾く
+      it 'ユーザー本名の名前のフリガナは、全角（カタカナ）での入力が必須であること' do
+        @user.first_name_kana = "ｱｲｳｴｵ"
+        @user.valid?
+        expect(@user.errors.full_messages).to include ( "First name kana 全角カタカナを使用してください" )
+      end
+
+      #全角ひらがなの場合を弾く
+      it 'ユーザー本名の名前のフリガナは、全角（カタカナ）での入力が必須であること' do
+        @user.first_name_kana = "あいうえお"
+        @user.valid?
+        expect(@user.errors.full_messages).to include ( "First name kana 全角カタカナを使用してください" )
+      end
 
       it '生年月日が必須であること' do
         @user.birth_id = ""
