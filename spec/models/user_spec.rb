@@ -87,14 +87,6 @@ RSpec.describe User, type: :model do
       end
 
 
-
-
-
-
-
-
-
-
       it 'ユーザー本名の苗字のフリガナが必須であること' do
         @user.last_name_kana = ""
         @user.valid?
@@ -127,18 +119,7 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include ( "Birth can't be blank" )
       end
 
-      it 'ログアウト状態では、ヘッダーに新規登録/ログインボタンが表示されること' do
-      end
-
-      it 'ログイン状態では、ヘッダーにユーザーのニックネーム/ログアウトボタンが表示されること' do
-      end
-
-      it 'ヘッダーの新規登録/ログインボタンをクリックすることで、各ページに遷移できること' do
-      end
-
-      it 'ヘッダーのログアウトボタンをクリックすることで、ログアウトができること' do
-      end
-
+      
   end
   
 end
