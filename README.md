@@ -32,6 +32,7 @@ has_many :records
 |text                      |text      |null: false       |
 |price                     |integer   |null: false       |
 |user                      |reference |foreign_key: true |
+
 |category_id               |integer   |null: false       |
 |product_condition_id      |integer   |null: false       |
 |shipping_charge_id        |integer   |null: false       |

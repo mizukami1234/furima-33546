@@ -1,0 +1,2 @@
+class EstimatedShippingDate < ApplicationRecord
+end
