@@ -22,4 +22,6 @@ class User < ApplicationRecord
   end
 
   validates :birth_id, presence: true
+
+  has_many :products
 end
