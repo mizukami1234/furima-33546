@@ -1,20 +1,12 @@
 class ProductsController < ApplicationController
   
-  def index 
-    @product = Product.all
-  end
+  #def index 
+   # @product = Product.all
+  #end
   
   def new
     @product = Product.new
   end
-
-  # render 
-
-  # new -> create -> new(view)
-
-  # rediredct_to
-
-  # new -> create -> route.rb(new) -> new
 
 
   def create

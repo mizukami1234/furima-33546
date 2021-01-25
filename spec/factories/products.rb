@@ -3,7 +3,6 @@ FactoryBot.define do
     product_name               { "商品名だよ" }
     text                       { "3年前に購入したものの使わずに置いてありました" }
     price                      { 5000 }
-    # user_id                  { 2 }
     category_id                { 2 }
     product_condition_id       { 2 }
     shipping_charge_id         { 2 }

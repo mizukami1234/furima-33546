@@ -19,13 +19,7 @@ class Product < ApplicationRecord
   validates :shipping_charge_id, numericality: { other_than: 1 }
   validates :shipment_source_id, numericality: { other_than: 0 }
   validates :estimated_shipping_date_id, numericality: { other_than: 1 }
-
-
-  validates :price, presence: true
-
-  with_options numericality: { :greater_than_or_equal_to => 300, :less_than_or_equal_to => 9999999}, format: { with: /\A[0-9]+\z/ , message: '半角数字のみ' } do
-    validates :price 
-  end
+  validates :price, presence: true, numericality: { :greater_than_or_equal_to => 300, :less_than_or_equal_to => 9999999}, format: { with: /\A[0-9]+\z/ , message: '半角数字のみ' }
 
 
  

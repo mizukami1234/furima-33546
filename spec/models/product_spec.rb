@@ -36,33 +36,33 @@ RSpec.describe Product, type: :model do
       end
 
       it 'カテゴリーが空だと出品できない' do
-        @product.category_id = "--"
+        @product.category_id = 1
         @product.valid?
-        expect(@product.errors.full_messages).to include ( "Category is not a number" )
+        expect(@product.errors.full_messages).to include ( "Category must be other than 1" )
       end
 
       it '商品の状態欄が空だと出品できない' do
-        @product.product_condition_id = "--"
+        @product.product_condition_id = 1
         @product.valid?
-        expect(@product.errors.full_messages).to include ( "Product condition is not a number" )
+        expect(@product.errors.full_messages).to include ( "Product condition must be other than 1" )
       end
 
       it '配送料の負担欄が空だと出品できない' do
-        @product.shipping_charge_id = "--"
+        @product.shipping_charge_id = 1
         @product.valid?
-        expect(@product.errors.full_messages).to include ( "Shipping charge is not a number" )
+        expect(@product.errors.full_messages).to include ( "Shipping charge must be other than 1" )
       end
 
       it '発送源の地域が空だと出品できない' do
-        @product.shipment_source_id = "--"
+        @product.shipment_source_id = 0
         @product.valid?
-        expect(@product.errors.full_messages).to include ( "Shipment source is not a number" )
+        expect(@product.errors.full_messages).to include ( "Shipment source must be other than 0" )
       end
 
       it '発送までの日数が空だと出品できない' do
-        @product.estimated_shipping_date_id = "--"
+        @product.estimated_shipping_date_id = 1
         @product.valid?
-        expect(@product.errors.full_messages).to include ( "Estimated shipping date is not a number" )
+        expect(@product.errors.full_messages).to include ( "Estimated shipping date must be other than 1" )
       end
 
       it '出品したユーザーが紐付いていないと出品できない' do
@@ -79,7 +79,7 @@ RSpec.describe Product, type: :model do
       end
 
       it '価格が299円以下だと出品できない' do
-        @product.price = 200
+        @product.price = 299
         @product.valid?
         expect(@product.errors.full_messages).to include ( "Price must be greater than or equal to 300" )
       end
