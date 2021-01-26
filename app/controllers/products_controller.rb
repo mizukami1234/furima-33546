@@ -1,8 +1,8 @@
 class ProductsController < ApplicationController
   
-  #def index 
-   # @product = Product.all
-  #end
+  def index 
+    @products = Product.includes(:user).order("created_at DESC")
+  end
   
   def new
     @product = Product.new
