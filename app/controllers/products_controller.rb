@@ -36,8 +36,7 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    if current_user.id == @product.user.id
-        @product.destroy
+    if @product.destroy
         redirect_to root_path
     else
       redirect_to product_path(@product.id)
@@ -56,8 +55,8 @@ def set_product
 end
 
 def move_to_index
-  product = Product.find(params[:id])
-  unless current_user.id == product.user.id
+  @product = Product.find(params[:id])
+  unless current_user.id == @product.user.id
     redirect_to action: :index
   end
 end
