@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  before_action :set_tweet, only: [:show, :edit, :update]
   before_action :move_to_index, except: [:index, :show]
   
   def index 
@@ -21,17 +22,14 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product = Product.find(params[:id])
   end
 
   def edit
-    @product = Product.find(params[:id])
   end
 
   def update 
-    product = Product.find(params[:id])
-    if product.update(product_params)
-      redirect_to product_path(product.id)
+    if @product.update(product_params)
+      redirect_to product_path(@product.id)
     else
       render 'edit'
     end
@@ -42,6 +40,10 @@ private
 
 def product_params
     params.require(:product).permit(:product_name, :text, :price, :image, :category_id, :product_condition_id, :shipping_charge_id, :shipment_source_id, :estimated_shipping_date_id).merge(user_id: current_user.id)
+end
+
+def set_tweet
+  @product = Product.find(params[:id])
 end
 
 def move_to_index
