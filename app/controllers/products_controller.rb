@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :set_tweet, only: [:show, :edit, :update]
+  before_action :set_product, only: [:show, :edit, :update]
   before_action :move_to_index, except: [:index, :show]
   
   def index 
@@ -42,7 +42,7 @@ def product_params
     params.require(:product).permit(:product_name, :text, :price, :image, :category_id, :product_condition_id, :shipping_charge_id, :shipment_source_id, :estimated_shipping_date_id).merge(user_id: current_user.id)
 end
 
-def set_tweet
+def set_product
   @product = Product.find(params[:id])
 end
 
