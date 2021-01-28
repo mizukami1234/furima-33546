@@ -5,5 +5,7 @@ Rails.application.routes.draw do
 
   resources :products do
   end
+
+  resources :orders, only: :index
   
 end
