@@ -32,8 +32,8 @@
 
   
     <%# 商品が売れていない場合はこちらを表示しましょう %>
-    <% elsif @product.present?%>
-    <%= link_to '購入画面に進む', product_orders_path(@product.id), class:"item-red-btn"%>
+    <% else %>
+    <%= link_to '購入画面に進む', product_orders_path(@product.id), class:"item-red-btn" %>
     <%# //商品が売れていない場合はこちらを表示しましょう %>
     <% end %>
   <% end %>
