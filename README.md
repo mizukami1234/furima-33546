@@ -45,7 +45,7 @@ has_many :records
 belongs_to :user
 has_one :record
 
-## recordsテーブル
+## ordersテーブル
 
 |Column      |Type      |Options           |
 |------------|----------|------------------|
@@ -68,8 +68,8 @@ has_one :address
 |house_number              |string    |null: false |
 |building_name             |string    |            |
 |phone_number              |string    |null: false |
-|record                    |reference |null: false |
+|order                     |reference |null: false |
 
 
 ### Association
-belongs_to :record
+belongs_to :order

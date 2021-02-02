@@ -7,20 +7,17 @@ class Product < ApplicationRecord
   belongs_to :estimated_shipping_date
 
   belongs_to :user
+  has_one :order
 
   has_one_attached :image
   validates :image, presence: true
-
-
 
   with_options presence: true do
     validates :product_name
     validates :text
   end
 
-
-
-  with_options numericality: { other_than: 1} do 
+  with_options numericality: { other_than: 1 } do
     validates :category_id
     validates :product_condition_id
     validates :shipping_charge_id
@@ -28,10 +25,6 @@ class Product < ApplicationRecord
   end
 
   validates :shipment_source_id, numericality: { other_than: 0 }
-  validates :price, presence: true, numericality: { :greater_than_or_equal_to => 300, :less_than_or_equal_to => 9999999}, format: { with: /\A[0-9]+\z/ , message: '半角数字のみ' }
-
-
- 
-
-
+  validates :price, presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 },
+                    format: { with: /\A[0-9]+\z/, message: '半角数字のみ' }
 end
