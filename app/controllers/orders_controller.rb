@@ -1,11 +1,11 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_product, only: [:index, :create]
   before_action :move_to_root_path, only: :index
 
 
 
 def index
-  @product = Product.find(params[:product_id])
   @order_address = OrderAddress.new
 end
 
@@ -14,11 +14,7 @@ end
 
 
 def create
-
-  @product = Product.find(params[:product_id])
   @order_address = OrderAddress.new(order_params)
-
-
     if @order_address.valid?
       pay_product
       @order_address.save
@@ -31,6 +27,10 @@ end
 
 
 private
+
+def set_product
+  @product = Product.find(params[:product_id])
+end
 
 def order_params
   params.require(:order_address).permit(:postal_code, :shipment_source_id, :city, :house_number, :building_name, :phone_number, :prefecture_id).merge(user: current_user.id, product: params[:product_id], token: params[:token])

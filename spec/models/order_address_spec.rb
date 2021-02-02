@@ -3,8 +3,13 @@ require 'rails_helper'
 RSpec.describe OrderAddress, type: :model do
   describe '配送先住所の登録' do
     before do
-      @order_address = FactoryBot.build(:order_address)
-    end
+      @user = FactoryBot.create(:user)
+      @product = FactoryBot.create(:product)
+      @order_address = FactoryBot.build(:order_address, user: @user.id , product: @product.id)
+      sleep 1
+     end
+
+
 
     it '配送先の情報として、郵便番号・都道府県・市区町村・番地・電話番号が必須であること' do 
       expect(@order_address).to be_valid
