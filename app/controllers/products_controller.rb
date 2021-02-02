@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :move_to_index, except: [:index, :show, :new, :create]
+  before_action :move_to_top, only: :edit
   
   def index 
     @products = Product.includes(:user).order("created_at DESC")
@@ -61,7 +62,11 @@ def move_to_index
   end
 end
 
-
+def move_to_top
+  if @product.order.present?
+    redirect_to root_path
+  end
+end
 
 
 
