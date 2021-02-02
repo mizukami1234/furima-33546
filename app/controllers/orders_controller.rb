@@ -9,10 +9,6 @@ def index
   @order_address = OrderAddress.new
 end
 
-def new
-end
-
-
 def create
   @order_address = OrderAddress.new(order_params)
     if @order_address.valid?
@@ -22,7 +18,6 @@ def create
     else
       render :index
     end
-
 end
 
 
@@ -46,7 +41,6 @@ def pay_product
 end
 
 def move_to_root_path
-  @product = Product.find(params[:product_id])
   if current_user.id == @product.user.id
     redirect_to root_path
   end

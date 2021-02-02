@@ -11,12 +11,12 @@ RSpec.describe OrderAddress, type: :model do
 
 
 
-    it '配送先の情報として、郵便番号・都道府県・市区町村・番地・電話番号が必須であること' do 
+    it '配送先の情報として、カード情報・郵便番号・都道府県・市区町村・番地・電話番号が必須であること' do 
       expect(@order_address).to be_valid
     end
 
     it 'postal_codeが半角のハイフンを含んだ正しい形式でないと保存できないこと' do
-      @order_address.postal_code = nil
+      @order_address.postal_code = "1234567"
       @order_address.valid?
       expect(@order_address.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
     end
@@ -32,16 +32,42 @@ RSpec.describe OrderAddress, type: :model do
       expect(@order_address).to be_valid
     end
 
-    it 'tokenがあれば保存できること' do
-      expect(@order_address).to be_valid
-    end
-
-    it ' tokenがなければ保存できないこと' do
+    it 'tokenがなければ保存できないこと' do
       @order_address.token = nil
       @order_address.valid?
       expect(@order_address.errors.full_messages).to include("Token can't be blank")
     end
 
+    it 'userが紐付いていないと登録できない' do
+      @order_address.user = nil
+      @order_address.valid?
+      expect(@order_address.errors.full_messages).to include("User can't be blank")
+    end
+
+    it 'productが紐付いていないと登録できない' do
+      @order_address.product = nil
+      @order_address.valid?
+      expect(@order_address.errors.full_messages).to include("Product can't be blank")
+    end
+
+    it 'cityが半角では登録できない' do
+      @order_address.city = "ﾖｺﾊﾏｼ"
+      @order_address.valid?
+      expect(@order_address.errors.full_messages).to include("City is invalid. Input full-width characters.")
+    end
+
+    it '電話番号が12桁では登録できない' do
+      @order_address.phone_number = "123456789012"
+      @order_address.valid?
+      expect(@order_address.errors.full_messages).to include("Phone number is invalid.")
+    end
+
+    it 'shipment_source_idが空(0)だと登録できない' do
+      @order_address.shipment_source_id = 0
+      @order_address.valid?
+      expect(@order_address.errors.full_messages).to include("Shipment source can't be blank")
+    end
+   
    
   end
 end
