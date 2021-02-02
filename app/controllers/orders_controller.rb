@@ -1,4 +1,8 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!
+  before_action :move_to_root_path, only: :index
+
+
 
 def index
   @product = Product.find(params[:product_id])
@@ -40,5 +44,14 @@ def pay_product
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
 end
+
+def move_to_root_path
+  @product = Product.find(params[:product_id])
+  if current_user.id == @product.user.id
+    redirect_to root_path
+  end
+end
+
+
 
 end
