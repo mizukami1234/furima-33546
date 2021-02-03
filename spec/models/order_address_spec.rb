@@ -38,6 +38,12 @@ RSpec.describe OrderAddress, type: :model do
         expect(@order_address.errors.full_messages).to include("Shipment source can't be blank")
       end
 
+      it 'house_numberがないと保存できない' do
+        @order_address.house_number = nil
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("House number can't be blank")
+      end
+
       it 'tokenがなければ保存できないこと' do
         @order_address.token = nil
         @order_address.valid?
