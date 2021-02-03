@@ -2,6 +2,7 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_product, only: [:index, :create]
   before_action :move_to_root_path, only: :index
+  before_action :move_to_top, only: :index
 
   def index
     @order_address = OrderAddress.new
@@ -40,6 +41,15 @@ class OrdersController < ApplicationController
   end
 
   def move_to_root_path
-    redirect_to root_path if current_user.id == @product.user.id
+   if current_user.id == @product.user.id
+    redirect_to root_path
+   end
   end
+
+  def move_to_top
+    if @product.order != nil
+      redirect_to root_path
+    end
+  end
+
 end
